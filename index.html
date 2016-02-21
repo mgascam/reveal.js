@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+		<link rel="stylesheet" href="css/theme/moon.css" id="theme">
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -41,42 +41,98 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>Reveal.js</h1>
-					<h3>The HTML Presentation Framework</h3>
-					<p>
-						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
-					</p>
-				</section>
+					<section>
+						<h1>What Is <em>SVG</em>?</h1>
+						<p>SVG is an XML-based, two-dimensional image format with support for interactivity and animation</p>
 
-				<section>
-					<h2>Hello There</h2>
-					<p>
-						reveal.js enables you to create beautiful interactive slide decks using HTML. This presentation will show you examples of what it can do.
-					</p>
+
+					</section>
+					<section>
+						<p>SVG is a markup language similar to HTML but is designed for another purpose: rendering shapes and images</p>
+						<pre> <code class="hljs" data-trim contenteditable>
+<svg height="100" width="100">
+	 <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3"
+fill="red" />
+</svg></code></pre>
+						<svg height="100" width="100">
+							<circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+						</svg>
+					</section>
+					<section>
+						<p>Since it is vector based, it can be scaled up and down maintaining the spatial relationships between the shapes.</p>
+						<p>And without loosing <em>quality</em>.</p>
+					</section>
+					<section>
+						<p>Since it is markup, it allows us to style or interact with the indivual elements that compose an SVG</p>
+						<pre> <code class="hljs" data-trim contenteditable>
+<style>
+
+.circle {
+	stroke: #000;
+	stroke-width: 3;
+	fill: #f00;
+}
+
+</style>
+
+<svg height="100" width="100">
+	 <circle cx="50" cy="50" r="40" class="circle"  />
+</svg></code></pre>
+					</section>
+					<section>
+						<p>Basic SVG features have good browser support.</p>
+						<p><a class="preview" href="http://caniuse.com/#search=svg">Can I Use</a></p>
+						<p><small>But UC Browser does not support masks at all...</small></p>
+					</section>
+					<section>
+						<h3>Looks nice, let's use it everywhere!</h3>
+						<p>Nope. It depends</p>
+						<ul>
+							<li>SVG is better suited for vector-based illustrations like icons, logos... </li>
+							<li>It also depends on the nature of the illustration. A complex svg can be bigger than its png version.</li>
+						</ul>
+						<img data-src="img/lion.png" style="" width="250" alt="">
+						<br>
+						<span style=" vertical-align: bottom;"><small>SVG ~2.9MB vs. PNG ~253 kB</small></span>
+					</section>
+					<section>
+						<p>...But if you need to create a high resolution version of it perhaps it worths it.</p>
+						<p>And SVG's can be gzipped also...</p>
+						<p><em>Each individual case is different. Test and compare.</em></p>
+					</section>
 				</section>
 
 				<!-- Example of nested vertical slides -->
 				<section>
 					<section>
-						<h2>Vertical Slides</h2>
-						<p>Slides can be nested inside of each other.</p>
-						<p>Use the <em>Space</em> key to navigate through all slides.</p>
-						<br>
-						<a href="#" class="navigate-down">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
+						<h1>A (quick) refresh of SVG syntax</h1>
+
+						<a href="img/car.svg" class="preview">
+							<img src="img/car.svg" alt="">
 						</a>
+
 					</section>
 					<section>
-						<h2>Basement Level 1</h2>
-						<p>Nested slides are useful for adding additional detail underneath a high level horizontal slide.</p>
+						<h2><span style="text-transform: none;">&lt;g&gt;</span></h2>
+						<ul>
+							<li>SVG group element. <a href="https://sarasoueidan.com/blog/structuring-grouping-referencing-in-svg/">It is not the only way of grouping elements</a></li>
+							<li>Similiar to a layer in a graphics editor.</li>
+							<li>Or a container in Easeljs.</li>
+						</ul>
 					</section>
 					<section>
-						<h2>Basement Level 2</h2>
-						<p>That's it, time to go back up.</p>
-						<br>
-						<a href="#/2">
-							<img width="178" height="238" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="transform: rotate(180deg); -webkit-transform: rotate(180deg);">
-						</a>
+						<h2><span style="text-transform: none;">&lt;linearGradient&gt;</span></h2>
+						<ul>
+							<li>Creates a linear gradient</li>
+							<li>Other elements can use it (e.g. to define fill attribute), referencing it by its id</li>
+							<li>It is defined by two or more &lt;stop&gt; elements, that define the colors and its offset (where the color starts) </li>
+						</ul>
+						<pre><code  class="hljs" data-trim contenteditable>
+<linearGradient id="d">
+  <stop stop-color="#666" offset="0"/>
+  <stop stop-color="#ababab" offset="1"/>
+</linearGradient>
+						</code></pre>
 					</section>
 				</section>
 
@@ -391,6 +447,7 @@ Reveal.addEventListener( 'customevent', function() {
 				progress: true,
 				history: true,
 				center: true,
+				previewLinks: true,
 
 				transition: 'slide', // none/fade/slide/convex/concave/zoom
 
