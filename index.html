@@ -51,7 +51,12 @@
 						<p>SVG is a markup language similar to HTML but is designed for another purpose: rendering shapes and images</p>
 						<pre> <code class="hljs" data-trim contenteditable>
 <svg height="100" width="100">
-	 <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3"
+	 <circle
+	 	cx="50"
+		cy="50"
+		r="40"
+		stroke="black"
+		stroke-width="3"
 fill="red" />
 </svg></code></pre>
 						<svg height="100" width="100">
@@ -104,14 +109,109 @@ fill="red" />
 
 				<!-- Example of nested vertical slides -->
 				<section>
-					<section>
-						<h1>A (quick) refresh of SVG syntax</h1>
+					<h2>Working with SVGs</h2>
 
-						<a href="img/car.svg" class="preview">
-							<img src="img/car.svg" alt="">
-						</a>
+					<a href="img/car.svg" class="preview">
+						<img src="img/car.svg" alt="">
+					</a>
+
+				</section>
+				<section>
+					<section>
+						<h2>SVG Coordinate System</h2>
+					</section>
+					<section>
+						<h3>SVG Canvas</h3>
+						<p>Area where the SVG content is drawn.</p>
+						<p>It is a <em>concept</em>: infinite in both dimensions. Can be any size</p>
+						<p>It is rendered on the screen relative to a finite region: <em>the viewport</em></p>
+					</section>
+					<section>
+						<h3>The viewport</h3>
+						<p>Sort of a <em>window</em> through which you see a particular scene</p>
+						<p>We could see the whole scene, or a portion of it.</p>
+						<p>It is defined with specific dimensions.</p>
+						<pre><code class="hljs">
+<!-- the viewport will be 800px by 600px -->
+<svg width="800" height="600">
+    <!-- SVG content drawn onto the SVG canvas -->
+</svg>
+						</code></pre>
+					</section>
+					<section>
+						<h3>The viewport</h3>
+						<p>We can set the dimension with or without a unit identifier:</p>
+						<ul>
+							<li>em, px, %....</li>
+							<li>user units</li>
+						</ul>
+						<p>Once this dimensions are set, the browser stablishes two coordinate systems</p>
+					</section>
+					<section>
+						<h3>The viewport coordinate system</h3>
+						<p>It has its origin set at the top left corner of the viewport.</p>
+						<p>It is similar to the coordinate system established on an HTML element using the CSS box model.</p>
+					</section>
+					<section>
+						<h3>The user coordinate system</h3>
+						<p>Coordinate system established on the SVG canvas.</p>
+						<p>Initially identical to the viewport coordinate system.</p>
+						<p>It can be modified using the <em>viewBox</em> attribute</p>
+					</section>
+					<section>
+						<h3>The viewBox</h3>
+						<p>Coordinate system used to draw the SVG content onto the canvas.</p>
+						<p>Can be smaller or bigger than the viewport.</p>
+						<p>It can be fully or partially visible inside the viewport too.</p>
 
 					</section>
+					<section>
+						<h3>The viewBox</h3>
+						<p>It takes four parameters:</p>
+						<ul>
+							<li><em>min-x</em> and <em>min-y</em>: determine the upper left corner of the viewbox.</li>
+							<li><em>width</em> and <em>height</em>. Only positive values.</li>
+						</ul>
+						<pre><code class="hljs">
+<!-- the viewport will be 800px by 600px -->
+<svg width="800" height="600" viewBox="0 0 800 600">
+	<!-- SVG content drawn onto the SVG canvas -->
+	<rect x="0" y="0" width="200" height="300"/>
+</svg>
+						</code></pre>
+					</section>
+					<section>
+						<h3>The viewBox: some examples</h3>
+						<p>By altering the viewBox properties we can scale or crop it</p>
+						<!-- the viewport will be 800px by 600px -->
+						<object type="image/svg+xml" data="img/legoMan-alt.svg">Your browser does not support SVGs</object>
+					</section>
+					<section>
+						<h3>Aspect Ratio</h3>
+						<p>So far, we have altered the viewBox but taking care of keeping the aspect ratio of the viewport.</p>
+						<p>But if we don't keep it...</p>
+						<object type="image/svg+xml" data="img/legoMan-distort.svg">Your browser does not support SVGs</object>
+					</section>
+					<section>
+						<h3>preserveAspectRatio syntax</h3>
+						<ul>
+							<li><em>align</em>: force uniform scaling and define an alignment method to fit the viewBox inside the viewport. In previous example we set it to "none"</li>
+							<li><em>meetOrSlice</em>: specify if the entire viewbox should be visible inside the new viewport</li>
+						</ul>
+					</section>
+					<section>
+						<h3>preserveAspectRatio: examples meet</h3>
+						<object type="image/svg+xml" data="img/legoMan-meet.svg">Your browser does not support SVGs</object>
+						<p>Scale the graphic as much as possible, the entire viewBox fits inside the viewport.</p>
+					</section>
+					<section>
+						<h3>preserveAspectRatio: examples slice</h3>
+						<object type="image/svg+xml" data="img/legoMan-slice.svg">Your browser does not support SVGs</object>
+						<p>Scale the graphic enough to cover the viewport area. Part of the viewbox is sliced</p>
+					</section>
+				</section>
+				<section>
+
 					<section>
 						<h2><span style="text-transform: none;">&lt;g&gt;</span></h2>
 						<ul>
