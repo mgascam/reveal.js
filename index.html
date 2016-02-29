@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js – The HTML Presentation Framework</title>
+		<title>SVG Animation – Miguel Gasca</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
@@ -28,7 +28,13 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
-
+		<style media="screen">
+			.basic-shape {
+				fill: #ccc;
+				stroke:#fff;
+				stroke-width:3px;
+			}
+		</style>
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
@@ -211,7 +217,238 @@ fill="red" />
 					</section>
 				</section>
 				<section>
+					<section>
+						<h2>Graphical Elements</h2>
+					</section>
+					<section>
+						<h3>Ellipse</h3>
+						<svg width="300" height="300" class="basic-shape">
+							<ellipse cx="150" cy="150" rx="150" ry="100" />
+						</svg>
+						<pre><code class="hljs">
+<svg width="300" height="300" class="basic-shape">
+	<ellipse cx="150" cy="150" rx="150" ry="100" />
+</svg>
+						</code></pre>
+					</section>
+					<section>
+						<h3>Round Rect </h3>
+						<svg width="300" height="300" class="basic-shape">
+							<rect x="0" y="0" width="300" height="300" rx="20" ry="20"/>
+						</svg>
+						<pre><code class="hljs">
+<svg width="300" height="300" class="basic-shape">
+<rect x="0" y="0" width="300" height="300" rx="20" ry="20"/>
+</svg>
+						</code></pre>
+					</section>
+					<section>
+						<h3>Line</h3>
+						<svg width="300" height="300" class="basic-shape">
+							<line x1="20" y1="200" x2="280" y2="100" />
+						</svg>
+						<pre><code class="hljs">
+<svg width="300" height="300" class="basic-shape">
+	<line x1="20" y1="200" x2="280" y2="100" />
+</svg>
+						</code></pre>
+					</section>
+					<section>
+						<h3>Polyline</h3>
+						<svg width="300" height="300" class="basic-shape">
+							<polyline points="20,200 80,50 160,150 200,90 280,160" />
+						</svg>
+						<pre><code class="hljs">
+<svg width="300" height="300" class="basic-shape">
+	<polyline points="20,200 80,50 160,150 200,90 280,160" />
+</svg>
+						</code></pre>
+					</section>
+					<section>
+						<h3>Polygon</h3>
+						<svg width="300" height="300" class="basic-shape">
+							 <polygon points="240,20 290,150 240,280 60,280 10,150 60,20"  />
+						</svg>
+						<pre><code class="hljs">
+<svg width="300" height="300" class="basic-shape">
+ <polygon points="240,20 290,150 240,280 60,280 10,150 60,20" />
+</svg>
+						</code></pre>
+					</section>
+					<section>
+						<h3>Path</h3>
+						<svg width="300" height="300" class="basic-shape">
+							<path d="M25,181.631c0,0,72.033-52.283,109.5-72.131
+					   c38.32-20.3,89.434,30.521,85.467,49.761S186,
+					   191.5,171.5,173s53.434-66.439,87.967-48.22c8.342,
+					   4.401,14.961,10.556,20.202,17.36" fill="none"
+				 />
+						</svg>
+						<pre><code class="hljs">
+<svg width="300" height="300" class="basic-shape">
+	<path d="M25,181.631c0,0,72.033-52.283,109.5-72.131
+   c38.32-20.3,89.434,30.521,85.467,49.761S186,
+   191.5,171.5,173s53.434-66.439,87.967-48.22c8.342,
+   4.401,14.961,10.556,20.202,17.36"
+   fill="none"/>
+</svg>
+						</code></pre>
+					</section>
+					<section>
+						<h3>Path</h3>
+						<p>Path Data attribute</p>
+						<ul>
+							<li>moveto = M. Starting point of the path</li>
+							<li>lineto = L</li>
+							<li>Arcs, cubic and quadratic beziers</li>
+							<li>closepath = Z</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Text</h3>
+						<svg width="300" height="300">
+            				<style>
+                				text { font-family: 'Myriad Pro', sans-serif; }
+            				</style>
+            				<rect x="0" y="85" fill="#FF742B" width="300" height="130" />
+            				<text x="70" y="175" fill=" #FFFFFF" font-size="72">TEXT</text>
+        				</svg>
+						<pre><code class="hljs">
+<svg width="300" height="300" class="basic-shape">
+<style>
+	text { font-family: 'Myriad Pro', sans-serif; }
+</style>
+<rect x="0" y="85" fill="#FF742B" width="300" height="130" />
+<text x="70" y="175" fill=" #FFFFFF" font-size="72">TEXT</text>
+</svg>
+						</code></pre>
+					</section>
+					<section>
+						<h3>Use</h3>
+						<svg width="300" height="300">
+							<!-- Item For Reuse -->
+				            <defs>
+				                <g id="itemForReuse">
+				                    <circle cx="50" cy="50" r="50" />
+				                </g>
+				            </defs>
 
+				            <!-- Item Use #1 -->
+				            <use xlink:href="#itemForReuse" x="0" y="0" fill="#FF742B" />
+
+				            <!-- Item Use #2 -->
+				            <use xlink:href="#itemForReuse" x="120" y="120" fill="#A2CE5D" />
+
+        				</svg>
+						<pre><code class="hljs">
+<svg width="300" height="300" class="basic-shape">
+	<defs>
+		<g id="itemForReuse">
+			<circle cx="50" cy="50" r="50" />
+		</g>
+	</defs>
+
+	<!-- Item Use #1 -->
+	<use xlink:href="#itemForReuse" x="0" y="0" fill="#FF742B" />
+
+	<!-- Item Use #2 -->
+	<use xlink:href="#itemForReuse" x="120" y="120" fill="#A2CE5D" />
+</svg>
+						</code></pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Container Elements</h3>
+
+					</section>
+					<section>
+						<h3>Defs</h3>
+						<p>Contains items defined for later reuse</p>
+						<svg width="300" height="300">
+							<!-- Item For Reuse -->
+							<defs>
+								<g id="itemForReuse">
+									<circle cx="50" cy="50" r="50" />
+								</g>
+							</defs>
+
+							<!-- Item Use #1 -->
+							<use xlink:href="#itemForReuse" x="0" y="0" fill="#FF742B" />
+
+							<!-- Item Use #2 -->
+							<use xlink:href="#itemForReuse" x="120" y="120" fill="#A2CE5D" />
+
+						</svg>
+						<pre><code class="hljs">
+<svg width="300" height="300" class="basic-shape">
+	<defs>
+		<g id="itemForReuse">
+			<circle cx="50" cy="50" r="50" />
+		</g>
+	</defs>
+
+	<!-- Item Use #1 -->
+	<use xlink:href="#itemForReuse" x="0" y="0" fill="#FF742B" />
+
+	<!-- Item Use #2 -->
+	<use xlink:href="#itemForReuse" x="120" y="120" fill="#A2CE5D" />
+</svg>
+						</code></pre>
+					</section>
+					<section>
+						<h3>g</h3>
+						<p>Used to group items together</p>
+						<svg width="300" height="300">
+							<style>
+								.group { fill: red; }
+							</style>
+							<g class="group">
+								<circle cx="50" cy="50" r="50" />
+								<circle cx="170" cy="170" r="50" />
+							</g>
+						</svg>
+						<pre><code class="hljs">
+<svg width="300" height="300" class="basic-shape">
+<style>
+	.group { fill: red; }
+</style>
+<g class="group">
+	<circle cx="50" cy="50" r="50" />
+	<circle cx="170" cy="170" r="50" />
+</g>
+</svg>
+						</code></pre>
+					</section>
+				</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<section
 					<section>
 						<h2><span style="text-transform: none;">&lt;g&gt;</span></h2>
 						<ul>
