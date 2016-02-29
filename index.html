@@ -359,7 +359,7 @@ fill="red" />
 				</section>
 				<section>
 					<section>
-						<h3>Container Elements</h3>
+						<h2>Container Elements</h2>
 
 					</section>
 					<section>
@@ -419,6 +419,288 @@ fill="red" />
 </g>
 </svg>
 						</code></pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Gradients</h3>
+						<ul>
+							<li>Not rendered on their own. Defined in the defs section.</li>
+							<li>Id attribute is required.</li>
+							<li>Used by other elements to define their fill or stroke attributes</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Linear Gradient</h3>
+						<svg width="300" height="300">
+						<!-- Gradient -->
+						  <defs>
+							  <linearGradient id="ln-gradient" x1="0" x2="0" y1="0" y2="1">
+								  <stop offset="0%" stop-color="#FCC1A7" />
+								  <stop offset="100%" stop-color="#F16823" />
+							  </linearGradient>
+						  </defs>
+
+						   <!-- Rectangle with gradient fill -->
+						   <rect fill="url(#ln-gradient)" x="0" y="0" width="300" height="200" />
+						   <pre><code class="hljs">
+<svg width="300" height="300">
+<!-- Gradient -->
+<defs>
+	<linearGradient id="ln-gradienti" x1="0" x2="0" y1="0" y2="1">
+	<stop offset="0%" stop-color="#FCC1A7" />
+	<stop offset="100%" stop-color="#F16823" />
+	</linearGradient>
+</defs>
+
+<!-- Rectangle with gradient fill -->
+<rect fill="url(#ln-gradienti)" x="0" y="0" width="300" height="200" />
+</svg>
+						   </code></pre>
+						</svg>
+					</section>
+					<section>
+						<h3>Radial Gradient</h3>
+						<svg width="300" height="300">
+							<!-- Gradient -->
+							<defs>
+							<radialGradient id="gradientb" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+								<stop offset="0%" stop-color="#FCC1A7" />
+								<stop offset="95%" stop-color="#F16823" />
+							</radialGradient>
+							</defs>
+							<!-- Rectangle with gradient fill -->
+							<rect fill="url(#gradientb)" x="0" y="0" width="300" height="200" />
+						</svg>
+						<pre><code class="hljs">
+<svg width="300" height="300">
+	<!-- Gradient -->
+	<defs>
+	<radialGradient id="gradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+		<stop offset="0%" stop-color="#FCC1A7" />
+		<stop offset="95%" stop-color="#F16823" />
+	</radialGradient>
+	</defs>
+	<!-- Rectangle with gradient fill -->
+	<rect fill="url(#gradient)" x="0" y="0" width="300" height="200" />
+</svg>
+						</code></pre>
+						<p>Require a circle to be defined. cx, cy, r define this circle</p>
+						<p>A focus can also be defined using fx , fy</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Embedding SVGs</h2>
+						<p>It can be embedded in a document in different ways, each of which has prons and cons</p>
+						<ol>
+							<li>as an image, using the img tag <pre><code><img src="mySVG.svg" alt="" /></code></pre></li>
+							<li>as background image in CSS<pre><code>.el {background-image: url(mySVG.svg);}</code></pre></li>
+							<li>as an object <pre><code><object type="image/svg+xml" data="mySVG.svg"><!-- fallback here --></object>
+</code></pre></li>
+							<li>as an iframe<pre><code><iframe src="mySVG.svg"><!-- fallback here --></iframe></code></pre></li>
+						</ol>
+					</section>
+					<section>
+						<h3>Embedding SVGs</h3>
+						<ol start="5">
+							<li>using the embed tag <pre><code><embed type="image/svg+xml" src="mySVG.svg" /></code></pre></li>
+							<li>inline</li>
+						</ol>
+					</section>
+					<section>
+						<h3>Embedding SVGs</h3>
+						<p>The recommended way is using the <em>object</em> tag</p>
+						<ul>
+							<li>It provides a fallback mechanism</li>
+							<li>Allows CSS styling and Javascript manipulation</li>
+							<li>Prevents polluting the document with svg code</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Embedding SVGs</h3>
+						<p>The simplest way is using the svg inline</p>
+						<ul>
+							<li>You can target it directly from any CSS file.</li>
+							<li>But it adds to the page size. Inline SVGs cannot be cached</li>
+							<li>Does not provide a fallback mechanism. IE8 does not support it.</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Embedding SVGs</h3>
+						<p>CSS background and <em>img</em> are treated in a similar way</p>
+						<ul>
+							<li>Does not preserve styles or animations applied in an external CSS resource</li>
+							<li>Loose ability to respond to CSS interactions (e.g. :hover)</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Responsive SVGs</h2>
+						<p>The most important thing to keep in mind is to remove <em>width</em> and <em>height</em> from the root <em>svg</em> element.</p>
+						<p>The <em>viewBox</em> attribute must be preserved.</p>
+						<p>Also <em>preserveAspectRatio</em> must be set to xMidYMid meet, but this is the default.</p>
+					</section>
+					<section>
+						<object type="image/svg+xml" data="img/legoMan-resp.svg">Your browser does not support SVGs</object>
+					</section>
+					<section>
+						<p>To achieve a consistent responsive behavior we need to deal with quite a lot of browser inconsistencies and bugs</p>
+						<p>Mostly, because how browser determine the dimensions of an SVG differ.</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>SVG Animation with CSS</h2>
+					</section>
+					<section>
+						<h3>Separation of concerns?</h3>
+						<p>The line between HTML and CSS is clear.</p>
+						<p>SVG blurs this line.</p>
+					</section>
+					<section>
+						<h3>Presentation attributes</h3>
+						<ul>
+							<li>Shorthand for setting a CSS property on an element</li>
+							<li>E.g. fill, stroke, stroke-width</li>
+						</ul>
+						<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="300px" height="300px" viewBox="0 0 300 300">
+							  <polygon
+							fill = "#FF931E"
+							stroke = "#ED1C24"
+							stroke-width = "5"
+							points = "279.1,160.8 195.2,193.3 174.4,280.8   117.6,211.1 27.9,218.3 76.7,142.7 42.1,59.6 129.1,82.7 197.4,24.1 202.3,114 "/>
+						</svg>
+						<pre><code class="hljs">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="300px" height="300px" viewBox="0 0 300 300">
+	  <polygon
+	fill = "#FF931E"
+	stroke = "#ED1C24"
+	stroke-width = "5"
+	points = "279.1,160.8 195.2,193.3 174.4,280.8   117.6,211.1 27.9,218.3 76.7,142.7 42.1,59.6 129.1,82.7 197.4,24.1 202.3,114 "/>
+</svg>
+						</code></pre>
+					</section>
+					<section>
+						<h3>Presentation attributes</h3>
+						<p><a class="preview" href="http://www.w3.org/TR/SVG/propidx.html">We can use a subset of CSS properties to style SVG elements.</a></p>
+						<ul>
+							<li>Some of these attributes are shared with CSS, like <em>opacity</em> or <em>transform</em></li>
+							<li>Others are specific: <em>fill</em>, <em>stroke</em>, <em>stroke-width</em></li>
+							<li>SVG 2 will add others like: <em>x</em>, <em>y</em>, <em>width</em></li>
+						</ul>
+					</section>
+					<section>
+						<h3>Presentation attributes</h3>
+						<p>We can also set this attributes inline or in a style tag.</p>
+						<p>The style tag can be placed inside the svg tag or outside it (e.g in the head of the document)</p>
+						<p>And you can link to an external style sheet from the SVG file.</p>
+						<pre><code class="hljs">
+<?xml version="1.0" standalone="no"?>
+<?xml-stylesheet type="text/css" href="style.css"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width=".." height=".." viewBox="..">
+  <!-- SVG content -->
+</svg>
+						</code></pre>
+					</section>
+					<section>
+						<h3>Selectors</h3>
+						<p>Most CSS selectors can be used to target SVG elements: type, class and ID</p>
+						<p>And also pseudo-classes like <em>:hover</em> or <em>:first-child</em></p>
+						<style>
+							circle {
+								fill: blue;
+								transition: fill .5s ease-out;
+							}
+
+							circle:hover {
+								fill: green;
+							}
+						</style>
+						<svg width="300" height="300">
+
+			            <!-- Rectangle with gradient fill -->
+			            <circle  cx="150" cy="150" r="100" />
+
+        				</svg>
+					</section>
+					<section>
+						<h2>Animation</h2>
+						<p>Using CSS keyframes and animation properties.</p>
+						<p>Using CSS transitions.</p>
+						<style>
+							.star {
+								animation: rotate 4s ease-out infinite alternate;
+								transform-origin: 50% 50%;
+							}
+
+							@-webkit-keyframes rotate {
+								50% {
+									-webkit-transform: rotate(360deg);
+								}
+							}
+						</style>
+						<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="300px" height="300px" viewBox="0 0 300 300">
+							  <polygon class="star"
+							fill = "#FF931E"
+							stroke = "#ED1C24"
+							stroke-width = "5"
+							points = "279.1,160.8 195.2,193.3 174.4,280.8   117.6,211.1 27.9,218.3 76.7,142.7 42.1,59.6 129.1,82.7 197.4,24.1 202.3,114 "/>
+						</svg>
+					</section>
+					<section>
+						<h3>Animating Paths</h3>
+						<style>
+							#my-path {
+								stroke-dasharray: 500;
+								stroke-dashoffset: 500;
+								stroke:#fff;
+								stroke-width:3px;
+								transition: stroke-dashoffset 1s linear;
+							}
+
+							svg:hover #my-path{
+								stroke-dashoffset:0;
+							}
+						</style>
+						<svg width="300" height="300" >
+							<path d="M25,181.631c0,0,72.033-52.283,109.5-72.131
+					   c38.32-20.3,89.434,30.521,85.467,49.761S186,
+					   191.5,171.5,173s53.434-66.439,87.967-48.22c8.342,
+					   4.401,14.961,10.556,20.202,17.36" id="my-path" fill="none"
+				 />
+						</svg>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>SVG Animation using Snap.svg</h2>
+					</section>
+					<section>
+						<h3>Snap.svg</h3>
+						<ul>
+							<li>Javascript library for working with SVG</li>
+							<li>By the author of Raphaël library - <a href="http://dmitry.baranovskiy.com/">Dimitry Baranovsky</a></li>
+							<li>Rewritten to support more modern browsers (IE9 and up) and features like:
+								<ul>
+									<li>masking</li>
+									<li>clipping</li>
+									<li>patterns</li>
+									<li>groups</li>
+								</ul>
+							</li>
+							<li>It allows to work with existing or generated svgs</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Snap.svg</h3>
+						<ul>
+							<li>Open Source: released under an Apache 2 license.</li>
+							<li>Minified version ~76 kB</li>
+							<li>Decent documentation, but lacks of examples</li>
+							<li>Supported by Adobe</li>
+						</ul>
 					</section>
 				</section>
 
